@@ -9,7 +9,7 @@ def total_cash(shop)
 end
 
 def add_or_remove_cash(shop, value)
-  return shop[:admin][:total_cash] += value
+  shop[:admin][:total_cash] += value
 end
 
 def pets_sold(shop)
@@ -21,7 +21,7 @@ def increase_pets_sold(shop, value)
 end
 
 def stock_count(shop)
-  return shop[:pets].length
+  return shop[:pets].length()
 end
 
 def pets_by_breed(shop, breed)
@@ -45,11 +45,12 @@ def find_pet_by_name(shop, name)
 end
 
 def remove_pet_by_name(shop, name)
-  for pet in shop[:pets]
-    if pet[:name] == name
-      shop[:pets].delete(pet)
-    end
-  end
+    shop[:pets].delete(find_pet_by_name(shop, name))
+    # for pet in shop[:pets]
+    #   if pet[:name] == name
+    #     shop[:pets].delete(pet)
+    #   end
+    # end
 end
 
 def add_pet_to_stock(shop, new_pet)
@@ -67,8 +68,9 @@ end
 #OPTIONAL SECTION
 
 def customer_can_afford_pet(customer, pet)
-  return true if customer[:cash] >= pet[:price]
-  return false
+  return customer[:cash] >= pet[:price]
+  # return true if customer[:cash] >= pet[:price]
+  # return false
 end
 
 def sell_pet_to_customer(shop, pet, customer)
