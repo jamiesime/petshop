@@ -40,7 +40,8 @@ def find_pet_by_name(shop, name)
       return pet
     end
   end
-  return nil
+  return nil #john said this return nil isn't stricly necessary, since a ruby function would in this case
+             #anyway.
 end
 
 def remove_pet_by_name(shop, name)
@@ -75,8 +76,8 @@ def sell_pet_to_customer(shop, pet, customer)
   if customer_can_afford_pet(customer, pet)
     add_pet_to_customer(customer, pet)
     remove_pet_by_name(shop, pet[:name])
-    shop[:admin][:pets_sold] += 1
-    shop[:admin][:total_cash] += pet[:price]
+    increase_pets_sold(shop, 1)
+    add_or_remove_cash(shop, pet[:price])
     customer[:cash] -= pet[:price]
   end
 end
